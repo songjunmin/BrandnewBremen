@@ -2,16 +2,18 @@ package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
-public class PlayerWeapon {
+@Setter
+public class InventoryWeapon {
     @Id @GeneratedValue
-    @Column(name = "player_weapon_id")
+    @Column(name = "inventory_weapon_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
-    private Player player;
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "weapon_id")
     private Weapon weapon;
