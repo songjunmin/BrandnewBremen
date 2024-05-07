@@ -2,13 +2,15 @@ package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
-public class Weapon {
+@NoArgsConstructor
+public class Weapon extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "weapon_id")
     private Long id;
@@ -27,8 +29,25 @@ public class Weapon {
     @OneToMany(mappedBy = "weapon", fetch = FetchType.LAZY)
     private List<Skill> skills = new ArrayList<>();
 
+    public Weapon(AttackType attackType, WeaponType weaponType, int physicalAp, int magicalAp, double attackCoefficient, int level) {
+        this.attackType = attackType;
+        this.weaponType = weaponType;
+        this.physicalAp = physicalAp;
+        this.magicalAp = magicalAp;
+        this.attackCoefficient = attackCoefficient;
+        this.level = level;
+    }
     public void addSkill(Skill skill) {
         skills.add(skill);
         skill.setWeapon(this);
+    }
+    public void increasePhysicalAp(int ap) {
+        physicalAp += ap;
+    }
+    public void increaseMagicalAp(int ap) {
+        magicalAp += ap;
+    }
+    public void increaseLevel(int level) {
+        this.level += level;
     }
 }
