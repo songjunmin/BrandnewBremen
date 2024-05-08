@@ -38,8 +38,8 @@ class PlayerMpUpgradeServiceTest {
         itemService.save(savedPlayerId, item);
 
         // 강화
-        Player updatedPlayer = mpUpgradeService.statUpgrade(savedPlayerId);
-        Assertions.assertThat(updatedPlayer.getMp()).isEqualTo(60);
+        int updatedMp = mpUpgradeService.statUpgrade(savedPlayerId);
+        Assertions.assertThat(updatedMp).isEqualTo(60);
     }
     @Test
     @DisplayName("골드 부족")

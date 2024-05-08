@@ -38,8 +38,8 @@ class PlayerMagicalApUpgradeServiceTest {
         itemService.save(savedPlayerId, item);
 
         // 강화
-        Player updatedPlayer = magicalApUpgradeService.statUpgrade(savedPlayerId);
-        Assertions.assertThat(updatedPlayer.getMagicalAp()).isEqualTo(11);
+        int updatedMagicalAp = magicalApUpgradeService.statUpgrade(savedPlayerId);
+        Assertions.assertThat(updatedMagicalAp).isEqualTo(11);
     }
     @Test
     @DisplayName("골드 부족")

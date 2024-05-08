@@ -38,8 +38,8 @@ class PlayerPhysicalApUpgradeServiceTest {
         itemService.save(savedPlayerId, item);
 
         // 강화
-        Player updatedPlayer = physicalApUpgradeService.statUpgrade(savedPlayerId);
-        Assertions.assertThat(updatedPlayer.getPhysicalAp()).isEqualTo(11);
+        int updatedPhysicalAp = physicalApUpgradeService.statUpgrade(savedPlayerId);
+        Assertions.assertThat(updatedPhysicalAp).isEqualTo(11);
     }
     @Test
     @DisplayName("골드 부족")
