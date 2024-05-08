@@ -1,6 +1,8 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +18,7 @@ public class Item extends BaseEntity {
     private ItemType itemType;
     private int quantity;
 
+    @Builder
     public Item(ItemType itemType, int quantity) {
         this.itemType = itemType;
         this.quantity = quantity;

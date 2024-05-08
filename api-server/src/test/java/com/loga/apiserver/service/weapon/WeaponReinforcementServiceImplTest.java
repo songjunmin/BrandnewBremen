@@ -1,6 +1,7 @@
 package com.loga.apiserver.service.weapon;
 
 import com.loga.apiserver.ApiServerApplication;
+import com.loga.apiserver.controller.dto.WeaponReinforceResponseDto;
 import com.loga.apiserver.domain.*;
 import com.loga.apiserver.exception.MaxWeaponLevelExceededException;
 import com.loga.apiserver.exception.NoHaveGoldException;
@@ -39,10 +40,10 @@ class WeaponReinforcementServiceImplTest {
         Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
         Long savedStaffId = weaponService.save(savedPlayerId, staff);
 
-        Weapon reinforcedStaff = reinforcementService.reinforce(savedPlayerId, savedStaffId);
+        WeaponReinforceResponseDto reinforcedStaff = reinforcementService.reinforce(savedPlayerId, savedStaffId);
 
         Assertions.assertThat(reinforcedStaff.getLevel()).isEqualTo(2);
-        Assertions.assertThat(reinforcedStaff.getMagicalAp()).isEqualTo(22);
+        Assertions.assertThat(reinforcedStaff.getAp()).isEqualTo(22);
     }
     @Test
     @DisplayName("공격력 무기 골드 O")
@@ -54,10 +55,10 @@ class WeaponReinforcementServiceImplTest {
         Weapon axe = new Weapon(AttackType.PHYSICAL, WeaponType.AXE, 15, 0, 1.5, 1);
         Long savedAxeId = weaponService.save(savedPlayerId, axe);
 
-        Weapon reinforcedStaff = reinforcementService.reinforce(savedPlayerId, savedAxeId);
+        WeaponReinforceResponseDto reinforcedAxe = reinforcementService.reinforce(savedPlayerId, savedAxeId);
 
-        Assertions.assertThat(reinforcedStaff.getLevel()).isEqualTo(2);
-        Assertions.assertThat(reinforcedStaff.getPhysicalAp()).isEqualTo(17);
+        Assertions.assertThat(reinforcedAxe.getLevel()).isEqualTo(2);
+        Assertions.assertThat(reinforcedAxe.getAp()).isEqualTo(17);
     }
     @Test
     @DisplayName("골드 부족")
