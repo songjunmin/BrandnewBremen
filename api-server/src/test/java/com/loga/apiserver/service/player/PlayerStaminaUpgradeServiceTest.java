@@ -38,8 +38,8 @@ class PlayerStaminaUpgradeServiceTest {
         itemService.save(savedPlayerId, item);
 
         // 강화
-        Player updatedPlayer = staminaUpgradeService.statUpgrade(savedPlayerId);
-        Assertions.assertThat(updatedPlayer.getStamina()).isEqualTo(60);
+        int updatedStamina = staminaUpgradeService.statUpgrade(savedPlayerId);
+        Assertions.assertThat(updatedStamina).isEqualTo(60);
     }
     @Test
     @DisplayName("골드 부족")

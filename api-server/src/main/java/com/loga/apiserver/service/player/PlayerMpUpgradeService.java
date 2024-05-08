@@ -18,11 +18,11 @@ public class PlayerMpUpgradeService extends PlayerStatUpgradeService {
         this.playerService = playerService;
     }
     @Transactional
-    public Player statUpgrade(Long id) {
+    public int statUpgrade(Long id) {
         Player foundPlayer = playerService.findById(id);
         if(foundPlayer.getMp() >= MAXIMUM_STAT_AMOUNT) {
             throw new MaxStatAmountExceededException("강화로 올릴 수 있는 최대 체력에 도달했습니다.");
         }
-        return super.logic(id, MP_INCREASE_AMOUNT, CONSUMPTION_GOLD, foundPlayer::increaseMp);
+        return super.logic(id, MP_INCREASE_AMOUNT, CONSUMPTION_GOLD, foundPlayer::increaseMp).getMp();
     }
 }
