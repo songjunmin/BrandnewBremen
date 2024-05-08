@@ -1,6 +1,6 @@
 package com.loga.apiserver.repository;
 
-import com.loga.reinforcementserver.domain.Inventory;
+import com.loga.apiserver.domain.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
