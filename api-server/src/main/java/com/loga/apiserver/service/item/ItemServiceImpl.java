@@ -30,9 +30,7 @@ public class ItemServiceImpl implements ItemService {
     public Long save(Long playerId, Item item) {
         Player foundPlayer = playerService.findById(playerId);
         itemRepository.save(item);
-        InventoryItem inventoryItem = new InventoryItem();
-        inventoryItem.setItem(item);
-        inventoryItem.setQuantity(item.getQuantity());
+        InventoryItem inventoryItem = new InventoryItem(item, item.getQuantity());
         foundPlayer.getInventory().addInventoryItem(inventoryItem);
         inventoryItemRepository.save(inventoryItem);
         return item.getId();
@@ -40,10 +38,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public void update(Long playerId, Item item) {
+    public void update(Long playerId, Long itemId, Item item) {
         Player foundPlayer = playerService.findById(playerId);
         InventoryItem inventoryItem = foundPlayer.getInventory().getInventoryItems().stream()
-                .filter(ii -> ii.getItem().getId().equals(item.getId()))
+                .filter(ii -> ii.getItem().getId().equals(itemId))
                 .findAny().orElseThrow(() -> new NoSuchItemException("아이템을 찾을 수 없습니다."));
         inventoryItem.increaseQuantity(item.getQuantity());
     }

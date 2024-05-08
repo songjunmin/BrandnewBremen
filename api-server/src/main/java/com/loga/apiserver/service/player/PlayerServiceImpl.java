@@ -56,6 +56,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    @Transactional
     public Player findWithPlayerSkillsAndSKill(Long id) {
         return playerRepository.findWithPlayerSkillsAndSKill(id);
     }

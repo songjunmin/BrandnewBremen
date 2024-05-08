@@ -1,5 +1,6 @@
 package com.loga.apiserver.service.weapon;
 
+import com.loga.apiserver.controller.dto.WeaponReinforceResponseDto;
 import com.loga.apiserver.domain.*;
 import com.loga.apiserver.exception.MaxWeaponLevelExceededException;
 import com.loga.apiserver.exception.NoHaveGoldException;
@@ -27,7 +28,7 @@ public class WeaponReinforcementServiceImpl implements WeaponReinforcementServic
 
     @Override
     @Transactional
-    public Weapon reinforce(Long playerId, Long weaponId) {
+    public WeaponReinforceResponseDto reinforce(Long playerId, Long weaponId) {
         Player foundPlayer = playerService.findById(playerId);
         List<InventoryWeapon> inventoryWeapons = foundPlayer.getInventory().getInventoryWeapons();
         Weapon weapon = inventoryWeapons.stream().map(InventoryWeapon::getWeapon).filter(w -> w.getId().equals(weaponId))
@@ -43,16 +44,23 @@ public class WeaponReinforcementServiceImpl implements WeaponReinforcementServic
                 weapon.increasePhysicalAp(AP_INCREASE_AMOUNT);
                 weapon.increaseLevel(LEVEL_INCREASE_AMOUNT);
                 goldItem.decreaseQuantity(goldItem.getQuantity() - CONSUMPTION_GOLD);
+                return WeaponReinforceResponseDto.builder()
+                        .ap(weapon.getPhysicalAp())
+                        .attackCoefficient(weapon.getAttackCoefficient())
+                        .level(weapon.getLevel()).build();
             }
-            else if(weapon.getAttackType().equals(AttackType.MAGICAL)) {
+            else {
                 weapon.increaseMagicalAp(AP_INCREASE_AMOUNT);
                 weapon.increaseLevel(LEVEL_INCREASE_AMOUNT);
                 goldItem.decreaseQuantity(goldItem.getQuantity() - CONSUMPTION_GOLD);
+                return WeaponReinforceResponseDto.builder()
+                        .ap(weapon.getMagicalAp())
+                        .attackCoefficient(weapon.getAttackCoefficient())
+                        .level(weapon.getLevel()).build();
             }
         }
         else {
             throw new NotEnoughGoldException("골드가 부족합니다.");
         }
-        return weapon;
     }
 }
