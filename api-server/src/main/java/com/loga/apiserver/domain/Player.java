@@ -1,6 +1,8 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +30,7 @@ public class Player extends BaseEntity {
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<PlayerSkill> playerSkills = new ArrayList<>();
 
+    @Builder
     public Player(int hp, int mp, int stamina, int physicalAp, int magicalAp) {
         this.hp = hp;
         this.mp = mp;

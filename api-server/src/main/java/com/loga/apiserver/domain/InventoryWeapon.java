@@ -1,12 +1,15 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class InventoryWeapon {
     @Id @GeneratedValue
     @Column(name = "inventory_weapon_id")

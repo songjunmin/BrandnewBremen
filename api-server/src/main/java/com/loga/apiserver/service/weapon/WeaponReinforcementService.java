@@ -1,7 +1,7 @@
 package com.loga.apiserver.service.weapon;
 
-import com.loga.apiserver.domain.Weapon;
+import com.loga.apiserver.controller.dto.WeaponReinforceResponseDto;
 
 public interface WeaponReinforcementService {
-    Weapon reinforce(Long playerId, Long weaponId);
+    WeaponReinforceResponseDto reinforce(Long playerId, Long weaponId);
 }

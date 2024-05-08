@@ -1,6 +1,8 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +31,7 @@ public class Weapon extends BaseEntity {
     @OneToMany(mappedBy = "weapon", fetch = FetchType.LAZY)
     private List<Skill> skills = new ArrayList<>();
 
+    @Builder
     public Weapon(AttackType attackType, WeaponType weaponType, int physicalAp, int magicalAp, double attackCoefficient, int level) {
         this.attackType = attackType;
         this.weaponType = weaponType;

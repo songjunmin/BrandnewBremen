@@ -1,6 +1,8 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +28,7 @@ public class Skill extends BaseEntity {
     @JoinColumn(name = "weapon_id")
     private Weapon weapon;
 
+    @Builder
     public Skill(int range, int coolTime, int mpConsumption, double skillCoefficient) {
         this.range = range;
         this.coolTime = coolTime;
