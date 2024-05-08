@@ -14,28 +14,30 @@ public class Skill extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "skill_id")
     private Long id;
-    @Column(name = "skill_coefficient")
-    private double skillCoefficient;
+    @Column(name = "range")
+    private int range;
     @Column(name = "cool_time")
     private int coolTime;
     @Column(name = "mp_consumption")
     private int mpConsumption;
+    @Column(name = "skill_coefficient")
+    private double skillCoefficient;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "weapon_id")
     private Weapon weapon;
-    @OneToMany(mappedBy = "skill", fetch = FetchType.LAZY)
-    List<PlayerSkill> playerSkills = new ArrayList<>();
 
-    public Skill(double skillCoefficient, int coolTime, int mpConsumption) {
-        this.skillCoefficient = skillCoefficient;
+    public Skill(int range, int coolTime, int mpConsumption, double skillCoefficient) {
+        this.range = range;
         this.coolTime = coolTime;
         this.mpConsumption = mpConsumption;
+        this.skillCoefficient = skillCoefficient;
     }
-    public void addPlayerSkill(PlayerSkill playerSkill) {
-        playerSkills.add(playerSkill);
-        playerSkill.setSkill(this);
-    }
+
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public void increaseSkillCoefficient(int skillCoefficient) {
+        this.skillCoefficient += skillCoefficient;
     }
 }
