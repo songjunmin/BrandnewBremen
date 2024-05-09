@@ -1,6 +1,7 @@
 package com.loga.apiserver.service.player;
 
 import com.loga.apiserver.ApiServerApplication;
+import com.loga.apiserver.domain.InventoryItem;
 import com.loga.apiserver.domain.Item;
 import com.loga.apiserver.domain.ItemType;
 import com.loga.apiserver.domain.Player;
@@ -40,6 +41,7 @@ class PlayerPhysicalApUpgradeServiceTest {
         // 강화
         int updatedPhysicalAp = physicalApUpgradeService.statUpgrade(savedPlayerId);
         Assertions.assertThat(updatedPhysicalAp).isEqualTo(11);
+
     }
     @Test
     @DisplayName("골드 부족")

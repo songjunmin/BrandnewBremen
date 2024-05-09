@@ -5,6 +5,7 @@ import com.loga.apiserver.domain.Weapon;
 import com.loga.apiserver.domain.WeaponType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,22 +19,22 @@ public class WeaponRequestDto {
     @NotEmpty
     @Schema(description = "weapon name", example = "axe")
     private String weaponName;
-    @NotEmpty
+    @ValidEnum(enumClass = AttackType.class)
     @Schema(description = "weapon attackType", example = "PHYSICAL")
     private AttackType attackType;
-    @NotEmpty
+    @ValidEnum(enumClass = WeaponType.class)
     @Schema(description = "weapon type", example = "AXE")
     private WeaponType weaponType;
-    @NotEmpty
+    @NotNull
     @Schema(description = "weapon physicalAp", example = "10")
     private int physicalAp;
-    @NotEmpty
+    @NotNull
     @Schema(description = "weapon magicalAp", example = "0")
     private int magicalAp;
-    @NotEmpty
+    @NotNull
     @Schema(description = "weapon attackCoefficient", example = "1")
     private double attackCoefficient;
-    @NotEmpty
+    @NotNull
     @Schema(description = "weapon level", example = "1")
     private int level;
 

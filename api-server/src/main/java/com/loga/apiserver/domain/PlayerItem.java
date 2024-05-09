@@ -11,10 +11,10 @@ public class PlayerItem {
     @Id @GeneratedValue
     @Column(name = "player_item_id")
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
     private Player player;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 }

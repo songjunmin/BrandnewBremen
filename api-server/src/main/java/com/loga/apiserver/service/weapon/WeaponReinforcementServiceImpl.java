@@ -43,7 +43,7 @@ public class WeaponReinforcementServiceImpl implements WeaponReinforcementServic
             if(weapon.getAttackType().equals(AttackType.PHYSICAL)) {
                 weapon.increasePhysicalAp(AP_INCREASE_AMOUNT);
                 weapon.increaseLevel(LEVEL_INCREASE_AMOUNT);
-                goldItem.decreaseQuantity(goldItem.getQuantity() - CONSUMPTION_GOLD);
+                goldItem.decreaseQuantity(CONSUMPTION_GOLD);
                 return WeaponReinforceResponseDto.builder()
                         .ap(weapon.getPhysicalAp())
                         .attackCoefficient(weapon.getAttackCoefficient())
@@ -52,7 +52,7 @@ public class WeaponReinforcementServiceImpl implements WeaponReinforcementServic
             else {
                 weapon.increaseMagicalAp(AP_INCREASE_AMOUNT);
                 weapon.increaseLevel(LEVEL_INCREASE_AMOUNT);
-                goldItem.decreaseQuantity(goldItem.getQuantity() - CONSUMPTION_GOLD);
+                goldItem.decreaseQuantity(CONSUMPTION_GOLD);
                 return WeaponReinforceResponseDto.builder()
                         .ap(weapon.getMagicalAp())
                         .attackCoefficient(weapon.getAttackCoefficient())
