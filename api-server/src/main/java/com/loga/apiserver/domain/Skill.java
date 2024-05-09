@@ -1,13 +1,9 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +12,8 @@ public class Skill extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "skill_id")
     private Long id;
+    @Column(name = "skill_name")
+    private String skillName;
     @Column(name = "range")
     private int range;
     @Column(name = "cool_time")
@@ -29,7 +27,8 @@ public class Skill extends BaseEntity {
     private Weapon weapon;
 
     @Builder
-    public Skill(int range, int coolTime, int mpConsumption, double skillCoefficient) {
+    public Skill(String skillName, int range, int coolTime, int mpConsumption, double skillCoefficient) {
+        this.skillName = skillName;
         this.range = range;
         this.coolTime = coolTime;
         this.mpConsumption = mpConsumption;

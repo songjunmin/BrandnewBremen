@@ -16,6 +16,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WeaponRequestDto {
     @NotEmpty
+    @Schema(description = "weapon name", example = "axe")
+    private String weaponName;
+    @NotEmpty
     @Schema(description = "weapon attackType", example = "PHYSICAL")
     private AttackType attackType;
     @NotEmpty
@@ -35,7 +38,9 @@ public class WeaponRequestDto {
     private int level;
 
     public Weapon toEntity() {
-        return Weapon.builder().attackType(attackType)
+        return Weapon.builder()
+                .weaponName(weaponName)
+                .attackType(attackType)
                 .weaponType(weaponType)
                 .physicalAp(physicalAp)
                 .magicalAp(magicalAp)

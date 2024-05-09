@@ -1,7 +1,6 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +15,8 @@ public class Weapon extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "weapon_id")
     private Long id;
+    @Column(name = "weapon_name")
+    private String weaponName;
     @Enumerated(EnumType.STRING)
     @Column(name = "attack_type")
     private AttackType attackType;
@@ -32,7 +33,8 @@ public class Weapon extends BaseEntity {
     private List<Skill> skills = new ArrayList<>();
 
     @Builder
-    public Weapon(AttackType attackType, WeaponType weaponType, int physicalAp, int magicalAp, double attackCoefficient, int level) {
+    public Weapon(String weaponName, AttackType attackType, WeaponType weaponType, int physicalAp, int magicalAp, double attackCoefficient, int level) {
+        this.weaponName = weaponName;
         this.attackType = attackType;
         this.weaponType = weaponType;
         this.physicalAp = physicalAp;

@@ -12,6 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 public class ItemRequestDto {
     @NotEmpty
+    @Schema(description = "item name", example = "gold")
+    private String itemName;
+    @NotEmpty
     @Schema(description = "item type", example = "GOLD")
     private ItemType itemType;
     @NotEmpty
@@ -19,6 +22,6 @@ public class ItemRequestDto {
     private int quantity;
 
     public Item toEntity() {
-        return Item.builder().itemType(itemType).quantity(quantity).build();
+        return Item.builder().itemName(itemName).itemType(itemType).build();
     }
 }

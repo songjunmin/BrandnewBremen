@@ -27,7 +27,7 @@ class WeaponServiceImplTest {
     void weaponSave() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
+        Weapon staff = new Weapon("staff", AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
         Long savedStaffId = weaponService.save(savedPlayerId, staff);
         Weapon foundStaff = weaponService.findById(savedStaffId);
 

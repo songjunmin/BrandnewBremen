@@ -14,6 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SkillRequestDto {
     @NotEmpty
+    @Schema(description = "skill name", example = "iceBall")
+    private String skillName;
+    @NotEmpty
     @Schema(description = "skill range", example = "150")
     private int range;
     @NotEmpty
@@ -27,7 +30,9 @@ public class SkillRequestDto {
     private double skillCoefficient;
 
     public Skill toEntity() {
-        return Skill.builder().range(range)
+        return Skill.builder()
+                .skillName(skillName)
+                .range(range)
                 .coolTime(coolTime)
                 .mpConsumption(mpConsumption)
                 .skillCoefficient(skillCoefficient).build();

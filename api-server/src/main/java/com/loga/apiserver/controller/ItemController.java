@@ -31,7 +31,7 @@ public class ItemController {
     )
     @PostMapping("/players/{playerId}/items")
     public Long save(@PathVariable("playerId") Long playerId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        return itemService.save(playerId, itemRequestDto.toEntity());
+        return itemService.save(playerId, itemRequestDto.getQuantity(), itemRequestDto.toEntity());
     }
 
     @ApiResponses(
@@ -43,6 +43,6 @@ public class ItemController {
     )
     @PatchMapping("/players/{playerId}/items/{itemId}")
     public void update(@PathVariable("playerId") Long playerId, @PathVariable("itemId") Long itemId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        itemService.update(playerId, itemId, itemRequestDto.toEntity());
+        itemService.update(playerId, itemId, itemRequestDto.getQuantity());
     }
 }

@@ -34,8 +34,8 @@ class PlayerStaminaUpgradeServiceTest {
         // 아이템 저장
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        itemService.save(savedPlayerId, item);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 10, item);
 
         // 강화
         int updatedStamina = staminaUpgradeService.statUpgrade(savedPlayerId);
@@ -46,8 +46,8 @@ class PlayerStaminaUpgradeServiceTest {
     void staminaUpgradeFailure() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 1);
-        itemService.save(savedPlayerId, item);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 1, item);
 
         Assertions.assertThatThrownBy(() -> staminaUpgradeService.statUpgrade(savedPlayerId))
                 .isInstanceOf(NotEnoughGoldException.class);
@@ -57,8 +57,8 @@ class PlayerStaminaUpgradeServiceTest {
     void staminaUpgradeX() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.HP, 1);
-        itemService.save(savedPlayerId, item);
+        Item item = new Item("hp", ItemType.HP);
+        itemService.save(savedPlayerId, 1,  item);
 
         Assertions.assertThatThrownBy(() -> staminaUpgradeService.statUpgrade(savedPlayerId))
                 .isInstanceOf(NoHaveGoldException.class);
@@ -68,8 +68,8 @@ class PlayerStaminaUpgradeServiceTest {
     void limit() {
         Player player = new Player(100, 50, 100, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        itemService.save(savedPlayerId, item);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 10, item);
 
         Assertions.assertThatThrownBy(() -> staminaUpgradeService.statUpgrade(savedPlayerId))
                 .isInstanceOf(MaxStatAmountExceededException.class);

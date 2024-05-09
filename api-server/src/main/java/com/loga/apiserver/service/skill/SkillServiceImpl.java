@@ -3,6 +3,7 @@ package com.loga.apiserver.service.skill;
 import com.loga.apiserver.domain.*;
 import com.loga.apiserver.exception.NoSuchSkillException;
 import com.loga.apiserver.exception.NoSuchWeaponException;
+import com.loga.apiserver.exception.SkillAlreadySavedException;
 import com.loga.apiserver.repository.PlayerSkillRepository;
 import com.loga.apiserver.repository.SkillRepository;
 import com.loga.apiserver.service.player.PlayerService;
@@ -31,11 +32,15 @@ public class SkillServiceImpl implements SkillService {
                 .stream().map(InventoryWeapon::getWeapon)
                 .filter(w -> w.getId().equals(weaponId))
                 .findAny().orElseThrow(() -> new NoSuchWeaponException("무기를 찾을 수 없습니다."));
+        boolean isPresent = foundWeapon.getSkills().stream()
+                .anyMatch(s -> s.getSkillName().equals(skill.getSkillName()));
+        if (isPresent) {
+            throw new SkillAlreadySavedException("이미 저장된 스킬 입니다.");
+        }
         skillRepository.save(skill);
         foundWeapon.addSkill(skill);
         PlayerSkill playerSkill = new PlayerSkill();
         playerSkill.setSkill(skill);
-        playerSkill.setPlayer(foundPlayer);
         foundPlayer.addPlayerSkill(playerSkill);
         playerSkillRepository.save(playerSkill);
         return skill.getId();
