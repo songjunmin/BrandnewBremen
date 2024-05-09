@@ -13,15 +13,15 @@ public class Item extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
+    @Column(name = "item_name")
+    private String itemName;
     @Enumerated(EnumType.STRING)
     @Column(name = "item_type")
     private ItemType itemType;
-    private int quantity;
 
     @Builder
-    public Item(ItemType itemType, int quantity) {
+    public Item(String itemName, ItemType itemType) {
+        this.itemName = itemName;
         this.itemType = itemType;
-        this.quantity = quantity;
     }
-
 }

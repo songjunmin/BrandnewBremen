@@ -35,9 +35,9 @@ class WeaponReinforcementServiceImplTest {
     void reinforceSuccess1() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        itemService.save(savedPlayerId, item);
-        Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 10, item);
+        Weapon staff = new Weapon("staff", AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
         Long savedStaffId = weaponService.save(savedPlayerId, staff);
 
         WeaponReinforceResponseDto reinforcedStaff = reinforcementService.reinforce(savedPlayerId, savedStaffId);
@@ -50,9 +50,9 @@ class WeaponReinforcementServiceImplTest {
     void reinforceSuccess2() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        itemService.save(savedPlayerId, item);
-        Weapon axe = new Weapon(AttackType.PHYSICAL, WeaponType.AXE, 15, 0, 1.5, 1);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 10, item);
+        Weapon axe = new Weapon("axe", AttackType.PHYSICAL, WeaponType.AXE, 15, 0, 1.5, 1);
         Long savedAxeId = weaponService.save(savedPlayerId, axe);
 
         WeaponReinforceResponseDto reinforcedAxe = reinforcementService.reinforce(savedPlayerId, savedAxeId);
@@ -65,9 +65,9 @@ class WeaponReinforcementServiceImplTest {
     void hpUpgradeFailure() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 1);
-        itemService.save(savedPlayerId, item);
-        Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 1, item);
+        Weapon staff = new Weapon("staff", AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
         Long savedStaffId = weaponService.save(savedPlayerId, staff);
 
         Assertions.assertThatThrownBy(() -> reinforcementService.reinforce(savedPlayerId, savedStaffId))
@@ -78,9 +78,9 @@ class WeaponReinforcementServiceImplTest {
     void hpUpgradeX() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.HP, 1);
-        itemService.save(savedPlayerId, item);
-        Weapon axe = new Weapon(AttackType.PHYSICAL, WeaponType.AXE, 15, 0, 1.5, 1);
+        Item item = new Item("gold", ItemType.HP);
+        itemService.save(savedPlayerId, 1, item);
+        Weapon axe = new Weapon("axe", AttackType.PHYSICAL, WeaponType.AXE, 15, 0, 1.5, 1);
         Long savedAxeId = weaponService.save(savedPlayerId, axe);
 
         Assertions.assertThatThrownBy(() -> reinforcementService.reinforce(savedPlayerId, savedAxeId))
@@ -91,9 +91,9 @@ class WeaponReinforcementServiceImplTest {
     void limit() {
         Player player = new Player(200, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        itemService.save(savedPlayerId, item);
-        Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 10);
+        Item item = new Item("gold", ItemType.GOLD);
+        itemService.save(savedPlayerId, 10, item);
+        Weapon staff = new Weapon("staff", AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 10);
         Long savedStaffId = weaponService.save(savedPlayerId, staff);
 
         Assertions.assertThatThrownBy(() -> reinforcementService.reinforce(savedPlayerId, savedStaffId))

@@ -5,6 +5,7 @@ import com.loga.apiserver.domain.ItemType;
 import com.loga.apiserver.domain.Player;
 import com.loga.apiserver.exception.NoHaveGoldException;
 import com.loga.apiserver.exception.NotEnoughGoldException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -12,17 +13,18 @@ import java.util.function.Consumer;
 public abstract class PlayerStatUpgradeService {
     private final PlayerService playerService;
 
+    @Autowired
     public PlayerStatUpgradeService(PlayerService playerService) {
         this.playerService = playerService;
     }
+
     Player logic(Long id, int increaseAmount, int consumptionGold, Consumer<Integer> increaseConsumer) {
         Player foundPlayer = playerService.findById(id);
         List<InventoryItem> inventoryItems = foundPlayer.getInventory().getInventoryItems();
-        System.out.println(inventoryItems.size());
         InventoryItem goldItem = inventoryItems.stream().filter(i -> i.getItem().getItemType().equals(ItemType.GOLD))
                 .findAny().orElseThrow(() -> new NoHaveGoldException("골드가 존재하지 않습니다."));
         if(goldItem.getQuantity() >= consumptionGold) {
-            goldItem.decreaseQuantity(goldItem.getQuantity() - consumptionGold);
+            goldItem.decreaseQuantity((consumptionGold));
             foundPlayer.increaseStats(increaseConsumer, increaseAmount);
         }
         else {

@@ -27,10 +27,10 @@ class SkillServiceImplTest {
     void skillSave() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Weapon staff = new Weapon(AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
+        Weapon staff = new Weapon("staff", AttackType.MAGICAL, WeaponType.STAFF, 0, 20, 2, 1);
         Long savedWeaponId = weaponService.save(savedPlayerId, staff);
 
-        Skill skill = new Skill(150, 30, 75, 5);
+        Skill skill = new Skill("iceBall", 150, 30, 75, 5);
         Long savedSkillId = skillService.save(savedPlayerId, savedWeaponId, skill);
         Skill foundSkill = skillService.findById(savedSkillId);
 

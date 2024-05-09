@@ -28,6 +28,10 @@ public class Player extends BaseEntity {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    private List<PlayerItem> playerItems = new ArrayList<>();
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    private List<PlayerWeapon> playerWeapons = new ArrayList<>();
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<PlayerSkill> playerSkills = new ArrayList<>();
 
     @Builder
@@ -41,6 +45,17 @@ public class Player extends BaseEntity {
     public void addInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+    public void addPlayerItem(PlayerItem playerItem) {
+        playerItems.add(playerItem);
+        playerItem.setPlayer(this);
+    }
+
+    public void addPlayerWeapon(PlayerWeapon playerWeapon) {
+        playerWeapons.add(playerWeapon);
+        playerWeapon.setPlayer(this);
+    }
+
     public void addPlayerSkill(PlayerSkill playerSkill) {
         playerSkills.add(playerSkill);
         playerSkill.setPlayer(this);

@@ -1,6 +1,5 @@
-package com.loga.apiserver.controller;
+package com.loga.apiserver.controller.dto;
 
-import com.loga.apiserver.controller.dto.ItemRequestDto;
 import com.loga.apiserver.service.item.ItemService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,8 +29,8 @@ public class ItemController {
             }
     )
     @PostMapping("/players/{playerId}/items")
-    public Long save(@PathVariable("playerId") Long playerId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        return itemService.save(playerId, itemRequestDto.toEntity());
+    public Long save(@PathVariable("playerId") Long playerId, @Valid @RequestBody ItemSaveRequestDto saveRequestDto) {
+        return itemService.save(playerId, saveRequestDto.getQuantity(), saveRequestDto.toEntity());
     }
 
     @ApiResponses(
@@ -42,7 +41,7 @@ public class ItemController {
             }
     )
     @PatchMapping("/players/{playerId}/items/{itemId}")
-    public void update(@PathVariable("playerId") Long playerId, @PathVariable("itemId") Long itemId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        itemService.update(playerId, itemId, itemRequestDto.toEntity());
+    public void update(@PathVariable("playerId") Long playerId, @PathVariable("itemId") Long itemId, @Valid @RequestBody ItemUpdateRequestDto updateRequestDto) {
+        itemService.update(playerId, itemId, updateRequestDto.getQuantity());
     }
 }

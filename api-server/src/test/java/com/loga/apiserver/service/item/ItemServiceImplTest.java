@@ -25,8 +25,8 @@ class ItemServiceImplTest {
     void itemSave() {
         Player player = new Player(100, 50, 50, 10, 10);
         Long savedPlayerId = playerService.save(player);
-        Item item = new Item(ItemType.GOLD, 10);
-        Long savedItemId = itemService.save(savedPlayerId, item);
+        Item item = new Item("gold", ItemType.GOLD);
+        Long savedItemId = itemService.save(savedPlayerId, 10, item);
         Item foundItem = itemService.findById(savedItemId);
 
         Assertions.assertThat(foundItem.getId()).isEqualTo(savedItemId);

@@ -1,7 +1,6 @@
 package com.loga.apiserver.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Inventory {
+public class Inventory extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "inventory_id")
     private Long id;
