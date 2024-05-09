@@ -5,10 +5,7 @@ import com.loga.apiserver.controller.dto.WeaponRequestDto;
 import com.loga.apiserver.service.weapon.WeaponReinforcementService;
 import com.loga.apiserver.service.weapon.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WeaponController {
@@ -22,7 +19,7 @@ public class WeaponController {
     }
 
     @PostMapping("/players/{playerId}/weapons")
-    public Long save(@PathVariable("playerId") Long playerId, WeaponRequestDto weaponRequestDto) {
+    public Long save(@PathVariable("playerId") Long playerId, @RequestBody WeaponRequestDto weaponRequestDto) {
         return weaponService.save(playerId, weaponRequestDto.toEntity());
     }
     @PatchMapping("/players/{playerId}/weapons/{weaponId}")
